@@ -4,6 +4,8 @@ const dotenv = require('dotenv');
 const app = express();
 const authRoute  = require('./routes/auth');
 const session = require('express-session');
+const userRoute = require('./routes/auth');
+
 const timeOut = 1000*60*2;
 
 dotenv.config();
@@ -13,6 +15,8 @@ mongoose.connect(process.env.DB_URL, { useNewUrlParser: true } ,()=>{
   });
   
 app.use(express.json());
+
+app.use('/user', userRoute);
 
 app.use(session({
   name:process.env.SESS_NAME,
@@ -30,7 +34,6 @@ app.use(session({
 app.use('/api/user', authRoute);
 
 app.get('/', (req, res) =>{
-  console.log("********************************************"); 
   console.log(req.session);
   res.send('Welcome Home')
 
