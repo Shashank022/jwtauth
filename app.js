@@ -31,17 +31,13 @@ app.use(session({
 
 }));
 
-app.use('/api/user', authRoute);
+app.use('/api/users', authRoute);
 
 app.get('/', (req, res) =>{
   console.log(req.session);
   res.send('Welcome Home')
 
 });
-
-app.get('/login', (req,res)=>{
-
-})
 
 app.get('/register', (req,res)=>{
   
